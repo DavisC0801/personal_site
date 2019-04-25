@@ -6,6 +6,8 @@ class HomepageTest < CapybaraTestCase
     #visit is a capybara method to load a page
     visit '/'
 
+    #this line saves and opens the page in the browser
+    #save_and_open_page
     #page is what is returned from visit
     assert page.has_content?("Welcome!")
     assert_equal 200, page.status_code
