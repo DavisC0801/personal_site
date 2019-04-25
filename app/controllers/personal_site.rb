@@ -6,21 +6,35 @@ class PersonalSite
     case env["PATH_INFO"]
     when '/' then index
     when '/about' then about
+    when '/main.css' then css
     else
       error
     end
   end
 
   def self.index
-    #this is the HTTP response status code, response headers and body
-    ['200', {'Content_Type' => 'text/html'}, [File.read('./app/views/index.html')]]
+    serve_page("index")
   end
 
   def self.error
-    ['404', {'Content_Type' => 'text/html'}, [File.read('./app/views/error.html')]]
+    serve_page("error", 404)
   end
 
   def self.about
-    ['200', {'Content_Type' => 'text/html'}, [File.read('./app/views/about.html')]]
+    serve_page("about")
   end
+
+  def self.css
+    serve_css("main")
+  end
+
+  def self.serve_page(path, code = 200)
+    #this is the HTTP response status code, response headers and body
+    [code, {'Content_Type' => 'text/html'}, [File.read("./app/views/#{path}.html")]]
+  end
+
+  def self.serve_css(path)
+    [200, {'Content_Type' => 'text/html'}, [File.read("./app/public/#{path}.css")]]
+  end
+
 end
