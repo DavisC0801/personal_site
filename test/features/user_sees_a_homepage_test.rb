@@ -8,6 +8,6 @@ class HomepageTest < CapybaraTestCase
 
     #page is what is returned from visit
     assert page.has_content?("Welcome!")
-    assert_equal 200 page.status_code
+    assert_equal 200, page.status_code
   end
 end
