@@ -5,6 +5,7 @@ class PersonalSite
   def self.call(env)
     case env["PATH_INFO"]
     when '/' then index
+    when '/about' then about
     else
       error
     end
@@ -17,5 +18,9 @@ class PersonalSite
 
   def self.error
     ['404', {'Content_Type' => 'text/html'}, [File.read('./app/views/error.html')]]
+  end
+
+  def self.about
+    ['200', {'Content_Type' => 'text/html'}, [File.read('./app/views/about.html')]]
   end
 end
